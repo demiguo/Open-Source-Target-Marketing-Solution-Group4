@@ -1,3 +1,5 @@
+#include <cstdio>
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -5,7 +7,6 @@
 #include "server-interface.h"
 #include "unit-interface.h"
 #include "utils.h"
-
 //#ifdef ENABLE_CGI
 
 #ifdef ENABLE_CGI
@@ -26,7 +27,8 @@ void rank(const Request& request, const Model& model, Response* response) {
 }
 
 void generate_html(const Response& response) {
-	string ret = "<html>\n";
+	string ret = "Content-type:text/html\r\n\r\n"; 
+    ret += "<html>\n";
 	ret += "  <head>\n";
 	ret += "    <title>Results</title>\n";
 	ret += "  </head>\n";
@@ -59,6 +61,9 @@ void start() {
 }  // namespace 
 
 int main() {
+//    FILE* f = fopen("test", "a");
+//    fprintf(f, "yes\n");
+//    fclose(f);
 	open_bracket::start();
 	return 0;
 }
