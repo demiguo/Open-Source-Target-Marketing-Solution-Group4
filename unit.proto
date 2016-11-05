@@ -1,0 +1,5 @@
+package open_bracket;
+
+message Unit {
+  optional string display_name = 1;
+}

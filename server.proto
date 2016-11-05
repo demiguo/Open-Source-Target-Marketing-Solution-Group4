@@ -1,0 +1,10 @@
+package open_bracket;
+
+import "unit.proto";
+
+message Request {
+}
+
+message Response {
+  repeated Unit unit = 1;
+}
