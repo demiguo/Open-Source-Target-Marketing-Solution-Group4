@@ -312,8 +312,10 @@ void solve() {
   int n2 = NUM_HIDDEN_FEATURES;
   int n1 = 0;
   std::vector<int> feature_ids;
+  const std::string rest1 = "100030019022004";
+  const std::string rest2 = "100030014001012";
   for (int i = 0; i < features.size(); ++i) {
-    if (features[i].hidden_features.size() == n2) {
+    if (features[i].hidden_features.size() == n2 && features[i].unit_id / 1000000000 == 100030) {
       feature_ids.push_back(i);
       ++n1;
     }
@@ -362,6 +364,32 @@ void solve() {
     }
     std::cout<<max_err<<'\n';
   }
+
+  vector<double> length;
+  for (int i = 0; i < n; ++i) {
+    double s = 0;
+    for (int d = 0; d < k; ++d) s += tVT[i * k + d] * tVT[i * k + d];
+    length.push_back(sqrt(s));
+  }
+
+  FILE *f = fopen("data/svd_similarity.dat", "w");
+  for (int i = 0; i < n; ++i) {
+    std::vector<pair<double, int>> w;
+    for (int j = 0; j < n; ++j) {
+      double s = 0;
+      for (int d = 0; d < k; ++d) s += tVT[i * k + d] * tVT[j * k + d];
+      s /= length[i] * length[j];
+      w.emplace_back(s, j);
+    }
+    sort(w.begin(), w.end()); 
+    reverse(w.begin(), w.end());  
+    fprintf(f, "%lld ", features[feature_ids[i]].unit_id);
+    for (int j = 0; j < 30; ++j) {
+      fprintf(f, " %lld", features[feature_ids[w[j].second]].unit_id);
+    }
+    fprintf(f, "\n");
+  }
+  fclose(f);
 
   delete[] tU;
   delete[] tS;
