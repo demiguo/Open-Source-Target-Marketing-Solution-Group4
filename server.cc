@@ -10,8 +10,8 @@
 #include "server-interface.h"
 #include "unit-interface.h"
 #include "utils.h"
-//#ifdef ENABLE_CGI
 
+#define ENABLE_CGI
 #ifdef ENABLE_CGI
 #include <cgicc/CgiDefs.h> 
 #include <cgicc/Cgicc.h> 
@@ -83,6 +83,7 @@ void rank(const Request& request, const Model& model, const SQueryIndex& index, 
 	}
 }
 
+std::string description;
 void generate_html(const Response& response) {
 	string ret = "Content-type:text/html\r\n\r\n"; 
     ret += "<html>\n";
@@ -97,6 +98,7 @@ void generate_html(const Response& response) {
 		ret += "<a href=\"" + link + "\" target=\"_blank\">" + text + "</a>";
 		ret += "</p>\n";
 	}
+//    ret += "<p>" + description + "</p>\n";
 	ret += "  </body>\n";
 	ret += "</html>\n";
 	cout << ret << endl;
@@ -106,16 +108,19 @@ void start() {
 	Model model;
 	load_from_file(model_file, &model);
 
+
 	SQueryIndex index;
 	load_from_file(unit_squery_index_filename, &index);
 
 	Request request;
 #ifdef ENABLE_CGI
-	Cgicc formData;
+    cgicc::Cgicc formData;
 	// TODO: parse request from HTML.
+    description = formData.getElement("input_describe")->getValue();
 	// TODO: parse current location from HTML.
 #endif
 
+    //formData
 	Response response;
 	rank(request, model, index, &response);
 	generate_html(response);
