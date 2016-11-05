@@ -41,7 +41,7 @@ bool load_from_file(const std::string& file, std::vector<T>* data) {
 		data->back().parse_from_string(line);
 	}
 	fclose(f);
-	printf("Load %d from file %s.\n", (int)data->size(), file.c_str());
+	//printf("Load %d from file %s.\n", (int)data->size(), file.c_str());
 	return true;
 }
 
@@ -52,7 +52,7 @@ bool load_from_file(const std::string& file, T* data) {
 	fgets(line, 1 << 20, f);
 	data->parse_from_string(line);
 	fclose(f);
-	printf("Read data from file %s\n", file.c_str());
+//	printf("Read data from file %s\n", file.c_str());
 	return true;
 }
 
@@ -60,14 +60,14 @@ template<class T>
 bool write_to_file(const std::string& file, const std::vector<T>& data) {
 	FILE *f = fopen(file.c_str(), "w");
 	if (f == nullptr) { 
-		printf("Fail to write file %s\n", file.c_str());
+//		printf("Fail to write file %s\n", file.c_str());
 		return false;
 	}
 	for (const auto& d : data) {
 		fprintf(f, "%s\n", d.serialize_to_string().c_str());
 	}
 	fclose(f);
-	printf("Write %d to file %s.\n", (int)data.size(), file.c_str());
+//	printf("Write %d to file %s.\n", (int)data.size(), file.c_str());
 	return true;
 }
 
@@ -75,12 +75,12 @@ template<class T>
 bool write_to_file(const std::string& file, const T& data) {
 	FILE *f = fopen(file.c_str(), "w");
 	if (f == nullptr) { 
-		printf("Fail to write file %s\n", file.c_str());
+//		printf("Fail to write file %s\n", file.c_str());
 		return false;
 	}
 	fprintf(f, "%s\n", data.serialize_to_string().c_str());
 	fclose(f);
-	printf("Write data to file %s\n", file.c_str());
+//	printf("Write data to file %s\n", file.c_str());
 	return true;
 }
 

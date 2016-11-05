@@ -19,6 +19,10 @@
 
 </head>
 <body>
+  <script>
+$(document).ready(function() {
+});
+</script>
 	<script type="text/javascript">
 	</script>
 	<div class="row">
@@ -30,7 +34,7 @@
 							<p style="text-align:center; color:white"><font size="6">The <b>Business Locator</b></font></p>
                 <div class="row">
                     <div class="col-sm-11">
-                        <iframe id="feature_graph" name="feature_graph" src="graph.html" style="height:540px;border:0px;width:740px"> 
+                        <iframe id="feature_graph" name="feature_graph" src="graph.html" style="background-color:black;height:100px;border:0px;width:100px"> 
                         </iframe>
                     </div>
                 </div>
@@ -41,15 +45,12 @@
                     <form role="form" id="describe_form" action="display.html" target="main" method="post">	
                         <script>
                             function updateWeights() {
-                              // update weights
-                              for (i = 0; i < 5; i ++) {
-                                  localStorage.weights[i] = document.getElementById("feature_graph").contentWindow[' 
-                              }
-                              // get features data
+                              window.localStorage.weights = document.getElementById("feature_graph").contentWindow['current_colors'];
+                              console.log(window.localStorage.weights);
                               document.getElementById("describe_form").submit();
                             }
                         </script>
-                         <input type="button" class="btn btn-info" onclick="updateDescription()" value="Next"></input>
+                         <input type="button" class="btn btn-info" onclick="updateWeights()" value="Next"></input>
                     </form>
                     </div>
                     <div class="col-sm-4">

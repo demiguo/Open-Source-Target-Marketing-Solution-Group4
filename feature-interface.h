@@ -15,6 +15,11 @@
 enum {
 	POPULATION = 0,
 	RENT_BUDGET = 1,
+	TOTAL_HOUSING_UNITS = 2,
+	OCCUPIED = 3,
+	VACANT = 4,
+	AREA = 5,
+	LENGTH = 6,
 	NUM_FEATURES,
 };
 
@@ -32,10 +37,17 @@ struct Feature {
 		unit_id = unit.id;
 		user_id = 0;
 		features[POPULATION] = unit.population;
+		features[TOTAL_HOUSING_UNITS] = unit.total_housing_units;
+		features[OCCUPIED] = unit.occupied;
+		features[VACANT] = unit.vacant;
+		features[AREA] = unit.area;
+		features[LENGTH] = unit.length;
+
+		// TODO: load real rent budget.
 		features[RENT_BUDGET] = 10.0;
 
 		// TODO: collect actual label.
-		label = 2.0 * (1.0 / (1.0 + exp(-unit.population / 2000.0)) - 0.5);
+		label = 2.0 * (1.0 / (1.0 + exp(-unit.total_housing_units / 10.0)) - 0.5);
 	}
 
 	// first unit, then features, then label
