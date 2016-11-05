@@ -3,6 +3,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
+
+#include "feature-interface.h"
 #include "model-interface.h"
 #include "server-interface.h"
 #include "unit-interface.h"
@@ -20,10 +23,32 @@ using namespace std;
 
 namespace open_bracket {
 
-void rank(const Request& request, const Model& model, Response* response) {
-	Unit unit;
-	unit.display_name = "downtown";
-	response->units.push_back(unit);
+namespace linear_regression {
+
+double predict(const Unit& unit, const Model& model) {
+	Feature feature;
+	feature.update(unit);
+	double sum = 0;
+	for (int i = 0; i < NUM_FEATURES; ++i) {
+		sum += model.parameters[i] * feature.features[i];
+	}
+	return sum;
+}
+
+}
+
+void rank(const Request& request, const Model& model, const vector<Unit>& units, Response* response) {
+	vector<pair<double, const Unit*>> units_sorted_by_score;
+	for (const auto& unit : units) {
+		units_sorted_by_score.emplace_back(linear_regression::predict(unit, model), &unit);
+	}
+	sort(units_sorted_by_score.rbegin(), units_sorted_by_score.rend());
+	if (request.num_results > 0 && request.num_results < units_sorted_by_score.size()) {
+		units_sorted_by_score.resize(request.num_results);
+	}
+	for (const auto& unit : units_sorted_by_score) {
+		response->units.push_back(*unit.second);
+	}
 }
 
 void generate_html(const Response& response) {
@@ -47,6 +72,9 @@ void start() {
 	Model model;
 	load_from_file(model_file, &model);
 
+	vector<Unit> units;
+	load_from_file(unit_filename, &units);
+
 	Request request;
 #ifdef ENABLE_CGI
 	Cgicc formData;
@@ -54,16 +82,13 @@ void start() {
 #endif
 
 	Response response;
-	rank(request, model, &response);
+	rank(request, model, units, &response);
 	generate_html(response);
 }
 
 }  // namespace 
 
 int main() {
-//    FILE* f = fopen("test", "a");
-//    fprintf(f, "yes\n");
-//    fclose(f);
 	open_bracket::start();
 	return 0;
 }

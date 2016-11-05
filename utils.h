@@ -16,7 +16,10 @@
 
 namespace open_bracket {
 namespace {
-char line[1 << 20];
+
+const int max_length = (1 << 20);
+char line[max_length];
+
 }
 
 extern const std::string model_file = "models.out";
@@ -41,6 +44,7 @@ bool load_from_file(const std::string& file, T* data) {
 	if (f == nullptr) return false;
 	fgets(line, 1 << 20, f);
 	data->parse_from_string(line);
+	printf("Read data from file %s\n", file.c_str());
 	return true;
 }
 
@@ -60,6 +64,7 @@ bool write_to_file(const std::string& file, const T& data) {
 	FILE *f = fopen(file.c_str(), "w");
 	fprintf(f, "%s\n", data.serialize_to_string().c_str());
 	fclose(f);
+	printf("Write data to file %s\n", file.c_str());
 	return true;
 }
 

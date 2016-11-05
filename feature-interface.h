@@ -7,6 +7,7 @@
 #include <sstream>
 #include <istream>
 #include <vector>
+#include <cmath>
 
 #include "unit-interface.h"
 
@@ -24,6 +25,16 @@ struct Feature {
 
 	Feature() {
 		features.resize(NUM_FEATURES);
+	}
+
+	void update(const Unit& unit) {
+		unit_id = unit.id;
+		user_id = 0;
+		features[POPULATION] = unit.population;
+		features[RENT_BUDGET] = 10.0;
+
+		// TODO: collect actual label.
+		label = 2.0 * (1.0 / (1.0 + exp(-unit.population / 2000.0)) - 0.5);
 	}
 
 	// first unit, then features, then label

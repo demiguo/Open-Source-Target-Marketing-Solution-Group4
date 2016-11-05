@@ -11,16 +11,6 @@ using namespace std;
 
 namespace open_bracket {
 
-void update_features(const Unit& unit, Feature* feature) {
-	feature->unit_id = unit.id;
-	feature->user_id = 0;
-	feature->features[POPULATION] = unit.population;
-	feature->features[RENT_BUDGET] = 10.0;
-
-	// TODO: collect actual label.
-	feature->label = 2.0 * (1.0 / (1.0 + exp(-unit.population / 2000.0)) - 0.5);
-}
-
 void extract_features() {
 	// Load units from file.
 	vector<Unit> units;
@@ -39,7 +29,7 @@ void extract_features() {
 		id_to_features[feature.unit_id] = feature;
 	}
 	for (const auto& unit : units) {
-		update_features(unit, &id_to_features[unit.id]);
+		id_to_features[unit.id].update(unit);
 	}
 
 	// Save features to file.

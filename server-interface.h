@@ -6,6 +6,7 @@
 #include <vector>
 
 struct Request {
+	int num_results = 10;
 };
 
 struct Response {
