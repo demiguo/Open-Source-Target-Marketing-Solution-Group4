@@ -21,8 +21,23 @@ struct Feature {
 		features.resize(NUM_FEATURES);
 	}
 
-	std::string serialize_to_string() const { return ""; }
-	void parse_from_string(std::string) {}
+	// first unit, then features, then label
+	std::string serialize_to_string() const { 
+		std::string ans = "";
+		ans += //serialize unit
+		ans += " ";
+		for (int i = 0; i < NUM_FEATURES; ++i) {
+			ans += to_string(features[i]);
+			ans += " ";
+		}
+
+		ans += to_string(label);
+		return ans;
+	}
+
+	void parse_from_string(std::string) {
+		
+	}
 };
 
 #endif  // FEATURE_INTERFACE_H
