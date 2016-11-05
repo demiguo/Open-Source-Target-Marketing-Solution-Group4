@@ -90,10 +90,17 @@ class Unit : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional string display_name = 1;
+  // optional int64 id = 1;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 1;
+  inline ::google::protobuf::int64 id() const;
+  inline void set_id(::google::protobuf::int64 value);
+
+  // optional string display_name = 2;
   inline bool has_display_name() const;
   inline void clear_display_name();
-  static const int kDisplayNameFieldNumber = 1;
+  static const int kDisplayNameFieldNumber = 2;
   inline const ::std::string& display_name() const;
   inline void set_display_name(const ::std::string& value);
   inline void set_display_name(const char* value);
@@ -104,6 +111,8 @@ class Unit : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:open_bracket.Unit)
  private:
+  inline void set_has_id();
+  inline void clear_has_id();
   inline void set_has_display_name();
   inline void clear_has_display_name();
 
@@ -111,6 +120,7 @@ class Unit : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
+  ::google::protobuf::int64 id_;
   ::std::string* display_name_;
   friend void  protobuf_AddDesc_unit_2eproto();
   friend void protobuf_AssignDesc_unit_2eproto();
@@ -126,15 +136,39 @@ class Unit : public ::google::protobuf::Message {
 
 // Unit
 
-// optional string display_name = 1;
-inline bool Unit::has_display_name() const {
+// optional int64 id = 1;
+inline bool Unit::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Unit::set_has_display_name() {
+inline void Unit::set_has_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Unit::clear_has_display_name() {
+inline void Unit::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void Unit::clear_id() {
+  id_ = GOOGLE_LONGLONG(0);
+  clear_has_id();
+}
+inline ::google::protobuf::int64 Unit::id() const {
+  // @@protoc_insertion_point(field_get:open_bracket.Unit.id)
+  return id_;
+}
+inline void Unit::set_id(::google::protobuf::int64 value) {
+  set_has_id();
+  id_ = value;
+  // @@protoc_insertion_point(field_set:open_bracket.Unit.id)
+}
+
+// optional string display_name = 2;
+inline bool Unit::has_display_name() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Unit::set_has_display_name() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Unit::clear_has_display_name() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void Unit::clear_display_name() {
   if (display_name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {

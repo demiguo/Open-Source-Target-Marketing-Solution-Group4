@@ -1,5 +1,6 @@
 package open_bracket;
 
 message Unit {
-  optional string display_name = 1;
+  optional int64 id = 1;
+  optional string display_name = 2;
 }

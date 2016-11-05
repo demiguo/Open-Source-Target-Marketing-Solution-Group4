@@ -34,7 +34,8 @@ void protobuf_AssignDesc_unit_2eproto() {
       "unit.proto");
   GOOGLE_CHECK(file != NULL);
   Unit_descriptor_ = file->message_type(0);
-  static const int Unit_offsets_[1] = {
+  static const int Unit_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Unit, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Unit, display_name_),
   };
   Unit_reflection_ =
@@ -78,8 +79,8 @@ void protobuf_AddDesc_unit_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\nunit.proto\022\014open_bracket\"\034\n\004Unit\022\024\n\014di"
-    "splay_name\030\001 \001(\t", 56);
+    "\n\nunit.proto\022\014open_bracket\"(\n\004Unit\022\n\n\002id"
+    "\030\001 \001(\003\022\024\n\014display_name\030\002 \001(\t", 68);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "unit.proto", &protobuf_RegisterTypes);
   Unit::default_instance_ = new Unit();
@@ -97,6 +98,7 @@ struct StaticDescriptorInitializer_unit_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int Unit::kIdFieldNumber;
 const int Unit::kDisplayNameFieldNumber;
 #endif  // !_MSC_VER
 
@@ -119,6 +121,7 @@ Unit::Unit(const Unit& from)
 void Unit::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
+  id_ = GOOGLE_LONGLONG(0);
   display_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -158,9 +161,12 @@ Unit* Unit::New() const {
 }
 
 void Unit::Clear() {
-  if (has_display_name()) {
-    if (display_name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-      display_name_->clear();
+  if (_has_bits_[0 / 32] & 3) {
+    id_ = GOOGLE_LONGLONG(0);
+    if (has_display_name()) {
+      if (display_name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        display_name_->clear();
+      }
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -177,9 +183,24 @@ bool Unit::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string display_name = 1;
+      // optional int64 id = 1;
       case 1: {
-        if (tag == 10) {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &id_)));
+          set_has_id();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_display_name;
+        break;
+      }
+
+      // optional string display_name = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_display_name:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_display_name()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -218,14 +239,19 @@ failure:
 void Unit::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:open_bracket.Unit)
-  // optional string display_name = 1;
+  // optional int64 id = 1;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->id(), output);
+  }
+
+  // optional string display_name = 2;
   if (has_display_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->display_name().data(), this->display_name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "display_name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->display_name(), output);
+      2, this->display_name(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -238,7 +264,12 @@ void Unit::SerializeWithCachedSizes(
 ::google::protobuf::uint8* Unit::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:open_bracket.Unit)
-  // optional string display_name = 1;
+  // optional int64 id = 1;
+  if (has_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->id(), target);
+  }
+
+  // optional string display_name = 2;
   if (has_display_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->display_name().data(), this->display_name().length(),
@@ -246,7 +277,7 @@ void Unit::SerializeWithCachedSizes(
       "display_name");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->display_name(), target);
+        2, this->display_name(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -261,7 +292,14 @@ int Unit::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional string display_name = 1;
+    // optional int64 id = 1;
+    if (has_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->id());
+    }
+
+    // optional string display_name = 2;
     if (has_display_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -295,6 +333,9 @@ void Unit::MergeFrom(const ::google::protobuf::Message& from) {
 void Unit::MergeFrom(const Unit& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_id()) {
+      set_id(from.id());
+    }
     if (from.has_display_name()) {
       set_display_name(from.display_name());
     }
@@ -321,6 +362,7 @@ bool Unit::IsInitialized() const {
 
 void Unit::Swap(Unit* other) {
   if (other != this) {
+    std::swap(id_, other->id_);
     std::swap(display_name_, other->display_name_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
