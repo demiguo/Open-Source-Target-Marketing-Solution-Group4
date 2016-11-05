@@ -5,9 +5,9 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "feature-interface.h"
-#include "unit-interface.h"
-#include "utils.h"
+#include "../interface/feature-interface.h"
+#include "../interface/unit-interface.h"
+#include "../utils/utils.h"
 
 using namespace std;
 

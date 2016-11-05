@@ -10,10 +10,10 @@
 #include <string.h>
 #include <istream>
 
-#include "feature-interface.h"
-#include "model-interface.h"
-#include "server-interface.h"
-#include "unit-interface.h"
+#include "../interface/feature-interface.h"
+#include "../interface/model-interface.h"
+#include "../interface/server-interface.h"
+#include "../interface/unit-interface.h"
 
 namespace open_bracket {
 namespace {
