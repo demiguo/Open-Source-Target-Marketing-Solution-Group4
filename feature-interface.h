@@ -4,6 +4,9 @@
 #include <cinttypes>
 #include <cstdint>
 #include <string>
+#include <sstream>
+#include <istream>
+#include <vector>
 
 #include "unit-interface.h"
 
@@ -26,19 +29,23 @@ struct Feature {
 	// first unit, then features, then label
 	std::string serialize_to_string() const { 
 		std::string ans = "";
-		ans += //serialize unit
-		ans += " ";
-		for (int i = 0; i < NUM_FEATURES; ++i) {
-			ans += to_string(features[i]);
-			ans += " ";
-		}
-
-		ans += to_string(label);
-		return ans;
+		std::ostringstream ss;
+		ss << unit_id << ' ' << user_id << ' ';
+		for (double d : features)
+			ss << d << ' ';
+		ss << label;
+		ss.flush();
+		return ss.str();
 	}
 
-	void parse_from_string(std::string) {
-		
+	void parse_from_string(std::string s) {
+		std::istringstream ss(s);
+		ss >> unit_id;
+		ss >> user_id;
+		features.resize(NUM_FEATURES);
+		for (int i = 0; i < NUM_FEATURES; ++i)
+			ss >> features[i];
+		ss >> label;
 	}
 };
 
