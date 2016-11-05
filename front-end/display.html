@@ -26,12 +26,18 @@
 }
 </style>
 
+    
 </head>
 
 <body>
 <div class="row">
-    <div class="col-sm-7" style="background-color:red">
-        <form role="form" id="run" action="server.cgi" target="result" method="post">
+<div class="col-sm-11">
+      <div class="jumbotron" style="height:650px; width:1350px; background: url('img/final-final.jpg') no-repeat center center;">
+
+<div class="row">
+    <div class="col-sm-12" >
+
+        <form role="form" id="run" action="server.cgi" target="result" method="post" >
         <input type="hidden" id="input_describe" name="input_describe" value=""></input>
         <input type="hidden" id="input_feature" name="input_feature" value=""></input>
         <script>
@@ -43,20 +49,34 @@
             document.getElementById("run").submit();
           }
         </script>
-        <input type="button" class="btn btn-info" value="submit button" onclick="submitForm()"></input>
+        <p style="text-align:center">
+        <input type="button" 
+        class="btn btn-info" value="submit button" onclick="submitForm()" ></input>
+        </p>
         </form>
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-7">
-        <iframe id="result" name="result" style="height:540px;border:0px;width:740px;background-color:yellow">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <p style="text-align:center">
+
+        <iframe id="result" name="result" style="position:absolute;height:540px;border:0px;width:740px;top:10px;left:380px;">
         </iframe>
+        </p>
     </div>
+    <div class="col-sm-2"></div>
+
 </div>
-<div class="row">
-  <div class="col-sm-11">
-          <a href="intro.html" target="main" class="btn btn-warning btn-lg" role="button">Restart</a>
+<div class="row" >
+  <div class="col-sm-12">
+            <p style="text-align:center">
+          <a href="intro.html" target="main" class="btn btn-warning btn-lg" role="button" style="position:absolute;left:640px;top:430px">Restart</a>
+          </p>
+
   </div>
+</div>
+</div>
 </div>
 </body>
 
