@@ -90,15 +90,24 @@ void generate_html(const Response& response) {
     ret += "<html>\n";
 	ret += "  <head>\n";
 	ret += "    <title>Results</title>\n";
+	ret += "<meta charset=\"utf-8\">\n\
+<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\
+<link href=\"http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css\" rel=\"stylesheet\">\n \
+<link href=\"http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap-theme.min.css\" rel=\"stylesheet\">\n \
+<script src=\"http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js\"></script>\n\
+<script src=\"http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js\"></script>\n";
 	ret += "  </head>\n";
 	ret += "  <body>\n";
+	int id = 0;
+	ret += "<div class=\"main\" style=\"background:transparent\">\n";
+	ret += "<div class=\"btn-group\" role=\"group\">\n";
 	for (const auto& unit : response.units) {
-		ret += "    <p>";
-		const string text = "geo-id: " + unit.display_name;
+		id ++;
+		const string text = "Rank" + to_string(id);
 		const string link = "https://www.google.com/maps/@" + to_string(unit.lat)+ "," + to_string(unit.lng) + ",15z";
-		ret += "<a href=\"" + link + "\" target=\"_blank\">" + text + "</a>";
-		ret += "</p>\n";
+		ret += "<a href=\"" + link + "\" target=\"_blank\" class=\"btn btn-info btn-lg btn-block\" role=\"button\">" + text + "</a>";
 	}
+	ret += "</div></div>\n";
 //    ret += "<p>" + description + "</p>\n";
 	ret += "  </body>\n";
 	ret += "</html>\n";
