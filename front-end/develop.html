@@ -1,0 +1,335 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+   <title>demi's first website</title>
+   <meta charset="utf-8">
+   <meta name="queryport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 新 Bootstrap 核心 CSS 文件 -->
+<link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- 可选的Bootstrap主题文件（一般不使用） -->
+<link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap-theme.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="css/bootstrap-toggle.min.css">
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<script src="js/bootstrap-toggle.min.js"></script>
+
+<style type="text/css">
+.btn-default {
+    color:#808080
+}
+</style>
+
+    
+</head>
+
+<body>
+<script>
+$(document).ready(function() {
+submitForm1();
+});
+</script>
+
+
+<div class="row">
+    <div class="col-sm-7">
+        <div class="row">
+            <div class="col-sm-12" >
+                <!--view Options-->
+                    <form role="form" id="develop1" action="server.cgi" target="develop_graph" method="post">
+                            <input type="hidden" id="develop1_filename" name="filename" value="default.graph"></input>
+                            <input type="hidden" id="develop1_formId" name="formId" value="develop1"></input>
+                            <input type="hidden" id="develop1_input" name="input" value=""></input>
+                            <input type="hidden" id="showDesignElements_value" name="showDesignElements_value" value=window.localStorage.showDesignElements></input>
+                            <input type="hidden" id="showVertexWeight_value" name="showVertexWeight_value" value=window.localStorage.showVertexWeight></input>
+                            <input type="hidden" id="showNextEdges_value" name="showNextEdges_value" value=window.localStorage.showNextEdges></input>
+                            <input type="hidden" id="showIncompatibleEdges_value" name="showIncompatibleEdges_value" value=window.localStorage.showIncompatibleEdges></input>
+
+                            <script>
+                                function oppo(boolstr) {
+                                    if (boolstr == "true") return "false";
+                                    return "true";
+                                }
+                                 $(document).ready(function() {
+                                 });
+                                function submitForm1() {
+                                    console.log("submit1");
+                                    console.log(window.localStorage.showDesignElements);
+                                    //modify logo 
+                                    if (window.localStorage.showDesignElements == "true") {
+                                        if (!$("#showDesignElements").hasClass('active')) {
+                                            $("#showDesignElements").addClass("active");
+                                        }
+                                    } else {
+                                        if ($("#showDesignElements").hasClass('active')) {
+                                            $("#showDesignElements").removeClass("active");
+                                        }
+
+                                    }
+                                    if (window.localStorage.showVertexWeight == "true") {
+                                        if (!$("#showVertexWeight").hasClass('active')) {
+                                            $("#showVertexWeight").addClass("active");
+                                        }
+                                    } else {
+                                        if ($("#showVertexWeight").hasClass('active')) {
+                                            $("#showVertexWeight").removeClass("active");
+                                        }
+
+                                    }
+                                    if (window.localStorage.showNextEdges == "true") {
+                                        if (!$("#showNextEdges").hasClass('active')) {
+                                            $("#showNextEdges").addClass("active");
+                                        }
+                                    } else {
+                                        if ($("#showNextEdges").hasClass('active')) {
+                                            $("#showNextEdges").removeClass("active");
+                                        }
+
+                                    }
+                                    if (window.localStorage.showIncompatibleEdges == "true") {
+                                        if (!$("#showIncompatibleEdges").hasClass('active')) {
+                                            $("#showIncompatibleEdges").addClass("active");
+                                        }
+                                    } else {
+                                        if ($("#showIncompatibleEdges").hasClass('active')) {
+                                            $("#showIncompatibleEdges").removeClass("active");
+                                        }
+
+                                    }
+                                    // change hidden
+                                    document.getElementById("develop1_filename").value = localStorage.filename;
+                                    document.getElementById("develop1_formId").value = "develop1";
+                                    document.getElementById("showDesignElements_value").value=window.localStorage.showDesignElements;
+                                    document.getElementById("showVertexWeight_value").value=window.localStorage.showVertexWeight;
+                                    document.getElementById("showNextEdges_value").value=window.localStorage.showNextEdges;
+                                    document.getElementById("showIncompatibleEdges_value").value=window.localStorage.showIncompatibleEdges;
+                                    
+                                    document.getElementById("develop1").submit();
+                            }
+                            </script>
+           <nav class="navbar navbar-default" style="position:relative; left:0px;">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav">
+                        <li>    <button style="height:50px;"type="button" id="showDesignElements" value="showDesignElements" class="btn btn-default" style="color:#8c8c8c" onclick="window.localStorage.showDesignElements=oppo(window.localStorage.showDesignElements); submitForm1();">Design Elements</button></a></li>
+                        <li><button style="height:50px;" type="button" id="showVertexWeight" value="showVertexWeight" class="btn btn-default" style="color:#8c8c8c" onclick="window.localStorage.showVertexWeight=oppo(window.localStorage.showVertexWeight); submitForm1();">Cost</button></li>
+                        <li> <button style="height:50px" type="button" id="showNextEdges" value="showNextEdges" class="btn btn-default" style="color:#8c8c8c" onclick="window.localStorage.showNextEdges=oppo(window.localStorage.showNextEdges); submitForm1();">Compatible Options</button></li>
+                        <li> <button style="height:50px" type="button" id="showIncompatibleEdges" value="showIncompatibleEdges" class="btn btn-default" style="color:#8c8c8c"  onclick="window.localStorage.showIncompatibleEdges=oppo(window.localStorage.showIncompatibleEdges); submitForm1();">Incompatible Options</button> </li>
+
+                    </ul>
+
+                </div>
+            </nav>
+
+                        </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-info" >
+                    <div class="panel-body" style="height: 565px">
+                        <iframe id="develop_graph" name="develop_graph" style="height:540px;border:0px;width:740px">
+                        </iframe>
+                    </div>
+                    <div style="padding:2px;" id="graph-heading" class="panel-heading">
+                        <script>
+                            function showPath() {
+                                var pathMessage = document.getElementById("query_graph").contentWindow['pathMessage'];
+                                $("#show-path").html(pathMessage);
+                            }
+                        </script>
+                        <button type="button" style="padding:2px" class="btn btn-info" onclick="showPath()">Show Path</button>
+                        <label id="show-path"></label>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-5">
+      <div class="row">
+           <nav class="navbar navbar-default" style="position:relative; left:15px; width:540px">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav">
+                        <li><a href="view.html" target="main">Load</a></li>
+                        <li class="active"><a href="develop.html" target="main">Library Extension</a></li>
+                        <li><a href="query.html" target="main">Design</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+        <div class="panel panel-info" style="height:655">
+            <div class="panel-body">
+                <form id="develop2" role="form" action="server.cgi" target="develop_graph"><div class="form-graph">
+                    <input type="hidden" id="develop2_filename" name="filename" value="default.graph"></input>
+                    <input type="hidden" id="develop2_formId" name="formId" value="develop2"></input>
+                    <input type="hidden" id="develop2_input" name="input" value=""></input>
+                    <script type="text/javascript">
+                        function submitForm2() {
+                            document.getElementById("develop2_filename").value = window.localStorage.filename;
+                            var value=document.getElementById("develop2_dropdown").value;
+                            value += " " + document.getElementById("input_text").value;
+                            console.log(value);
+
+                            document.getElementById("develop2_input").value = value;
+                            document.getElementById("input_text").placeholder=document.getElementById("input_text").value;
+                            document.getElementById("input_text").value="";
+                            document.getElementById("develop2").submit();
+                            $(document).ready(function() {
+                                $("#display").collapse('hide');
+                                $("#console").collapse('hide');
+                                $("#error").collapse('hide');
+                            });
+
+                        }
+                    function updateSystem() {
+                        document.getElementById("hints").innerHTML = document.getElementById("develop_graph").contentWindow['systemMessage'];
+                    }
+                            function updateHints() {
+                            var value = document.getElementById("develop2_dropdown").value;
+                            var hint = document.getElementById("hints");
+                            console.log(hint);
+                            if (value == "ADD_OPTION" || value == "DELETE_OPTION") {
+                                hint.innerHTML = "Format: <option1 name> <option2 name> ... <optionN name>"
+                            }
+                            if (value == "UPDATE_OPTION_PARAMETER") {
+                                            hint.innerHTML = "Format: <option name> <parameter size> <parameter1 name> <default value> <number of possible values> <value 1> <value 2> ... <parameter2 name> ...";
+                            }
+                            if (value == "UPDATE_OPTION_WEIGHT") {
+                                hint.innerHTML = "Format: <option name> <weight>";
+                            }
+                            if (value == "ADD_NEXT_EDGE" || value == "DELETE_NEXT_EDGE" || value == "ADD_INCOMPATIBLE_EDGE" ||
+                                    value == "DELETE_INCOMPATIBLE_EDGE") {
+                                hint.innerHTML = "Format: <option A of edge 1> <option B of edge 1> <option A of edge 2> ... ";
+                            }
+                            if (value == "UPDATE_OPTION_NAME") {
+                                hint.innerHTML= "Format: <current option name> <new option name>";
+                            }
+                            if (value == "UPDATE_OPTION_DESCRIPTION") {
+                                hint.innerHTML = "Format: <option name> <new description>"; 
+                            }
+                            if (value == "ADD_ONE_MEASUREMENT_FOR_OPTIONS") {
+                                            hint.innerHTML= "Format1(Add a known measurement): <measurement name> <-1/0/1 : -1=bad 0=neutral 1=good> <number of options> <option1 name> <option2 name> ...";
+                                            hint.innerHTML+= "<br>";
+                                            hint.innerHTML += "Format2(Add an unknown measurement): <measurement name> <2> <number of options> <option1 name> <option2 name> ... <code>";
+                                            document.getElementById("color-meaning").innerHTML = "Light colored circles are modified options";
+                            }
+                            if (value == "DEFINE_A_DESIGN_ELEMENT") {
+                                hint.innerHTML= "Format: [design element name] [number of mandatory options] [option1 name] .. [number of optional options] [option1 name] .. [number of input APIs] [input API 1(string)] [intput API 2] ...";
+                                document.getElementById("color-meaning").innerHTML = "Orange circles are mandatory. Green circles are optional.";
+                            }
+                            if (value == "SHOW_A_DESIGN_ELEMENT") {
+                                hint.innerHTML = "Format: [design element name]";
+                            }
+                            if (value == "MODIFY_INPUT_API_FOR_ONE_OPTION") {
+                                hint.innerHTML= "Format: [option name] [input API1] [intput API2] ...";
+                            }
+                            if (value == "MODIFY_ENVIRONMENT_PARAMETERS") {
+                                hint.innerHTML= "Format: [environment parameter1 name] [parameter1 value] [environment parameter2 name] [parameter2 value] ..."
+                            }
+                            if (value == "MODIFY_INPUT_API_FOR_ONE_OPTION") {
+                                            document.getElementById("additional").innerHTML = "<button type=\"button\" onclick=\"add(value)\" value=\"get_range\" class=\"btn btn-default\">Get Range</button><button type=\"button\" onclick=\"add(value)\" value=\"put\" class=\"btn btn-default\">Put</button><button type=\"button\" onclick=\"add(value)\" value=\"get\" class=\"btn btn-default\">Get</button>"
+        
+                            } else if (value == "MODIFY_ENVIRONMENT_PARAMETERS") {
+                                document.getElementById("additional").innerHTML = "<button type=\"button\" onclick=\"updateSystem()\" class=\"btn btn-default\">Input Parameters</button>"
+                            } else {
+                                document.getElementById("additional").innerHTML = "";
+                            }
+                    }
+                function showDisplay() {
+                    document.getElementById("hints").innerHTML = document.getElementById("develop_graph").contentWindow['displayMessage'];
+                }
+                function showConsole() {
+                    document.getElementById("hints").innerHTML = document.getElementById("develop_graph").contentWindow['consoleMessage'];
+                    document.getElementById("hints").innerHTML += document.getElementById("develop_graph").contentWindow['errorMessage'];
+                }
+
+                function add(v) {
+                console.log("hi");
+                document.getElementById("input_text").value+= " " + v;
+                console.log(document.getElementById("input_text").value);
+                    }
+                    </script>
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <select id="develop2_dropdown" class="form-control" onchange="updateHints()">
+                                <option value="ADD_OPTION">Add options</option>
+                                <option value="DELETE_OPTION">Delete options</option>
+                                <option value="UPDATE_OPTION_PARAMETER">Update option parameter</option>
+                                <option value="UPDATE_OPTION_WEIGHT">Update option cost</option>
+                                <option value="ADD_NEXT_EDGE">Add compatible options</option>
+                                <option value="DELETE_NEXT_EDGE">Delete compatible options</option>
+                                <option value="ADD_INCOMPATIBLE_EDGE">Add incompatible options</option>
+                                <option value="DELETE_INCOMPATIBLE_EDGE">Delete incompatible options</option>
+                                <option value="UPDATE_OPTION_NAME">Update option name</option>
+                                <option value="UPDATE_OPTION_DESCRIPTION">Update option description</option>
+                                <option value="ADD_ONE_MEASUREMENT_FOR_OPTIONS">Add measurements</option>
+                                <option value="DEFINE_A_DESIGN_ELEMENT">Define a design element</option>
+                                <option value="SHOW_A_DESIGN_ELEMENT">Show a design element</option>
+                                <option value="MODIFY_INPUT_API_FOR_ONE_OPTION">Modify Input APIs</option>
+                                <option value="MODIFY_ENVIRONMENT_PARAMETERS">Modify input parameters</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <div id="additional"></div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <input type="text" id="input_text" class="form-control" placehoder="?"></input>
+                        </div>
+                        <div class="col-sm-5">
+                            <button type="button" onclick="submitForm2()" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                    <br>
+                            <button type="button" onclick="showDisplay()" class="btn btn-default">Display</button>
+                    <button type="button" onclick="showConsole()" class="btn btn-default">Console</button>
+                            <button type="button" onclick="updateHints()" class="btn btn-default">Format</button>
+                  <br>  <br>
+                    <textarea rows="14" id="hints" class="form-control" placeholder="Description"></textarea>
+                <script type="text/javascript"> 
+                        updateHints(document.getElementById("develop2_dropdown").value);
+                </script>
+                    </div></form>
+                 <hr/>
+                 <div class="row">
+                    <div class="col-sm-4">
+                 <p>
+                 <a  class="btn btn-default" data-toggle="collapse" href="#color-meaning" aria-expanded="false" aria-controls="collapseExample">
+                                 What does color mean? 
+                                                 </a>
+                 </p>
+                        </div>
+                    <div class="col-sm-4">
+              <img src="img/circle1.png" style="height:15px;width:20px;"></img>
+                                 &nbsp<img src="img/circle2.png" style="height:15px;width:20px;"></img>
+                                 &nbsp<img src="img/circle3.png" style="height:15px;width:20px;"></img>
+                    </div>
+                    <div class="col-sm-4">
+                    </div>
+                 </div>
+                     <div class="collapse" id="color-meaning">
+                            Light colored circles are design elements. Others are design spaces.
+                 </div>
+                 <script>
+                    $(document).ready(function(){ 
+                        $("#color-meaning").collapse('show');
+                    });
+                 </script>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,14 @@
+12
+put 3
+put 4
+put 6
+put 7
+put 9
+put 10
+put 5
+put 1
+put 2
+getValue 5
+getValue 10
+getRange 5 9
+
