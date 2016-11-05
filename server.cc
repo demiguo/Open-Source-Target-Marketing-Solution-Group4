@@ -3,7 +3,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <sstream>
 #include <algorithm>
+#include <unordered_set>
 
 #include "feature-interface.h"
 #include "model-interface.h"
@@ -11,7 +13,7 @@
 #include "unit-interface.h"
 #include "utils.h"
 
-#define ENABLE_CGI
+//#define ENABLE_CGI
 #ifdef ENABLE_CGI
 #include <cgicc/CgiDefs.h> 
 #include <cgicc/Cgicc.h> 
@@ -43,6 +45,33 @@ double predict(const Unit& unit, const Model& model) {
 
 }
 
+bool filter_by_svd_similarity(int64_t location, vector<Unit>* units) {
+	FILE *f = fopen("data/svd_similarity.dat", "r");
+	if (f == nullptr) return false;
+	unordered_set<int64_t> selected;
+	while (fgets(line, 1 << 20, f) != nullptr) {
+		istringstream sin(line);
+		int64_t key;
+		sin >> key;
+		if (key != location) continue;
+		for (; sin >> key; ) selected.insert(key);
+	}
+	fclose(f);
+	int num_selected = 0;
+	for (const auto& unit : *units) {
+		if (selected.count(unit.id)) ++num_selected;
+	}
+	if (num_selected < 20) {
+		return false;
+	}
+	vector<Unit> filtered_units;
+	for (const auto& unit : *units) {
+		if (selected.count(unit.id)) filtered_units.push_back(unit);
+	}
+	units->swap(filtered_units);
+	return true;
+}
+
 void rank(const Request& request, const Model& model, const SQueryIndex& index, Response* response) {
 	// Extract candidates.
 	std::string location = request.query_location;
@@ -67,8 +96,11 @@ void rank(const Request& request, const Model& model, const SQueryIndex& index, 
 	if (opt_s_query.empty()) {
 		return;
 	}
+
 	vector<Unit> units;
 	load_from_file(unit_filename(opt_s_query), &units);
+
+	filter_by_svd_similarity(stol(location), &units);
 
 	// Ranking
 	vector<pair<double, const Unit*>> units_sorted_by_score;
@@ -133,7 +165,6 @@ void parse_request(const std::string& description, Request* request) {
 void start() {
 	Model model;
 	load_from_file(model_file, &model);
-
 
 	SQueryIndex index;
 	load_from_file(unit_squery_index_filename, &index);
