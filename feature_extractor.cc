@@ -3,6 +3,8 @@
 #include <vector>
 #include <map>
 #include <unordered_map>
+#include <unordered_set>
+
 #include "feature-interface.h"
 #include "unit-interface.h"
 #include "utils.h"
@@ -15,11 +17,14 @@ void extract_features() {
 	// Load units from file.
 	SQueryIndex index;
 	load_from_file(unit_squery_index_filename, &index);
+	unordered_set<int64_t> unit_ids;
 	vector<Unit> units;
 	for (const auto& content : index.num_contents) {
 		vector<Unit> sub_units;
 		load_from_file(unit_filename(content.first), &sub_units);
 		for (const auto& unit : sub_units) {
+			if (unit_ids.count(unit.id)) continue;
+			unit_ids.insert(unit.id);
 			units.push_back(unit);
 		}
 	}

@@ -22,6 +22,9 @@
 using namespace std;
 
 namespace open_bracket {
+namespace {
+const std::string default_location = "100050517021070";
+}
 
 namespace linear_regression {
 
@@ -37,7 +40,34 @@ double predict(const Unit& unit, const Model& model) {
 
 }
 
-void rank(const Request& request, const Model& model, const vector<Unit>& units, Response* response) {
+void rank(const Request& request, const Model& model, const SQueryIndex& index, Response* response) {
+	// Extract candidates.
+	std::string location = request.query_location;
+	if (location.empty()) {
+		location = default_location;
+	}
+	vector<std::string> queries = generate_location_s_query(location);
+	int64_t opt_s_query_count = 0;
+	std::string opt_s_query;
+	int64_t expected_count = request.num_results * 3;
+	for (const auto& query : queries) {
+		if (!index.num_contents.count(query)) {
+			continue;
+		}
+		const int64_t count = index.num_contents.at(query);
+		if ((count >= expected_count && (opt_s_query_count < expected_count || count < opt_s_query_count)) ||
+				(count < expected_count && opt_s_query_count < expected_count && count > opt_s_query_count)) {
+			opt_s_query = query;
+			opt_s_query_count = count;
+		}
+	}
+	if (opt_s_query.empty()) {
+		return;
+	}
+	vector<Unit> units;
+	load_from_file(unit_filename(opt_s_query), &units);
+
+	// Ranking
 	vector<pair<double, const Unit*>> units_sorted_by_score;
 	for (const auto& unit : units) {
 		units_sorted_by_score.emplace_back(linear_regression::predict(unit, model), &unit);
@@ -72,17 +102,18 @@ void start() {
 	Model model;
 	load_from_file(model_file, &model);
 
-	vector<Unit> units;
-	load_from_file(unit_filename(0), &units);
+	SQueryIndex index;
+	load_from_file(unit_squery_index_filename, &index);
 
 	Request request;
 #ifdef ENABLE_CGI
 	Cgicc formData;
 	// TODO: parse request from HTML.
+	// TODO: parse current location from HTML.
 #endif
 
 	Response response;
-	rank(request, model, units, &response);
+	rank(request, model, index, &response);
 	generate_html(response);
 }
 

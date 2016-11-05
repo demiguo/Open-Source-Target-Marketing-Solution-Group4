@@ -6,12 +6,11 @@
 #include <string>
 #include <sstream>
 
-// Return general ones last.
 std::vector<std::string> generate_location_s_query(const std::string& location) {
 	std::vector<std::string> s_query;
 	const int length = location.length();
-	for (int i = 1; i <= length; ++i) {
-		s_query.push_back("l" + std::to_string(i) + "_" + location.substr(length - i));
+	for (int i = 0; i <= length; ++i) {
+		s_query.push_back("l" + std::to_string(i) + "_" + location.substr(0, i));
 	}
 	return s_query;	
 }

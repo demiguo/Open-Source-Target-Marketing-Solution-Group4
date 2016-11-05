@@ -45,11 +45,13 @@ void write_units(const std::vector<Unit>& units) {
   write_to_file(unit_squery_index_filename, index);
 
   for (const auto& content : contents) {
-    std::vector<Unit> sub_units;
-    for (const auto& unit : content.second) {
-      sub_units.push_back(*unit);
+    if (content.second.size() >= min_num_candidates) {
+      std::vector<Unit> sub_units;
+      for (const auto& unit : content.second) {
+        sub_units.push_back(*unit);
+      }
+      write_to_file(unit_filename(content.first), sub_units);
     }
-    write_to_file(unit_filename(content.first), sub_units);
   }
 }
 
