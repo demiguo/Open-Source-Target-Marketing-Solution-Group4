@@ -11,7 +11,7 @@ std::vector<std::string> tokenize(std::string s){
   for(int i=1;i<=s.length();i++){
     if(i == s.length() || s[i] == ','){
       ans.push_back(s.substr(start, i - start));
-      start = i;
+      start = i+1;
     }
   }
   return ans;
