@@ -9,7 +9,16 @@ using namespace std;
 
 namespace open_bracket {
 
+namespace linear_regression {
+
+void train(const std::vector<Feature>& features, Model* model) {
+
+}
+
+}
+
 void train_model(const std::vector<Feature>& features, Model* model) {
+	linear_regression::train(features, model);
 }
 
 void learner() {

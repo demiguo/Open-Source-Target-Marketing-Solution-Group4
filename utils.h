@@ -11,9 +11,9 @@
 
 namespace open_bracket {
 
-extern const std::string model_file = "model.dat";
-extern const std::string unit_filename = "unit.dat";
-extern const std::string feature_filename = "feature.dat";
+extern const std::string model_file = "models.out";
+extern const std::string unit_filename = "units.out";
+extern const std::string feature_filename = "features.out";
 
 template<class T>
 bool load_from_file(const std::string& file, std::vector<T>* data) {
