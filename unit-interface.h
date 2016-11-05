@@ -9,7 +9,9 @@ struct Unit {
 	int64_t id;
 	std::string display_name;
 
-	std::string serialize_to_string() const { return ""; }
+	std::string serialize_to_string() const {
+	  return std::to_string(id) + " " + display_name;
+	}
 	void parse_from_string(std::string) {}
 };
 
