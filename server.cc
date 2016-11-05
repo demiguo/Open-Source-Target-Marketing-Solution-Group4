@@ -1,14 +1,13 @@
 #include <iostream>
-#include "server.pb.h"
+#include <vector>
+#include "server-interface.h"
+#include "unit-interface.h"
 
 using namespace std;
 
 namespace open_bracket {
 
 void rank(const Request& request, Response* response) {
-	auto* unit = response->add_unit();
-	unit->set_display_name("downtown");
-	unit->set_id(0);
 }
 
 void start() {
@@ -18,7 +17,7 @@ void start() {
 
 	// TODO: write responses.
 	rank(request, &response);
-	cout << "reponse = " << response.DebugString().c_str();
+	//cout << "reponse = " << response.DebugString().c_str();
 }
 
 }  // namespace 
