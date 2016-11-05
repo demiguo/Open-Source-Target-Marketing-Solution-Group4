@@ -11,7 +11,7 @@
 #include "unit-interface.h"
 #include "utils.h"
 
-#define ENABLE_CGI
+//#define ENABLE_CGI
 #ifdef ENABLE_CGI
 #include <cgicc/CgiDefs.h> 
 #include <cgicc/Cgicc.h> 
@@ -25,6 +25,7 @@ namespace open_bracket {
 namespace {
 const std::string default_location = "100050517021070";
 const std::string rest1 = "100030019022004";
+const std::string rest2 = "100030014001012";
 }
 
 namespace linear_regression {
@@ -104,6 +105,22 @@ void generate_html(const Response& response) {
 	cout << ret << endl;
 }
 
+void parse_request(const std::string& description, Request* request) {
+	// Not implemented yet.
+	// TODO: use NLP to parse the meaning of the description.
+
+	// Followings are hacky code for demos.
+	if (description.find("Harry's Seafood")) {
+		request->query_location = rest1;
+	} else if (description.find("Desserts")) {
+		request->query_location = rest2;
+	}
+	FILE *f = fopen("test.log", "w");
+	fprintf(f, "description = %s\n", description.c_str());
+	fprintf(f, "request.query_location = %s\n", request->query_location.c_str());
+	fclose(f);
+}
+
 void start() {
 	Model model;
 	load_from_file(model_file, &model);
@@ -117,6 +134,7 @@ void start() {
     cgicc::Cgicc formData;
 	// TODO: parse request from HTML.
     description = formData.getElement("input_describe")->getValue();
+    parse_request(description, &request);
 	// TODO: parse current location from HTML.
 #endif
 
