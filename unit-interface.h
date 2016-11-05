@@ -51,17 +51,19 @@ struct Unit {
     double area = 0;
     double length = 0;
 
+    double lat = 0, lng = 0;
+
 	std::string serialize_to_string() const {
 	    return std::to_string(id) + " " + display_name + " " +
 	      	   std::to_string(population) + " " + location + " " +
 	      std::to_string(total_housing_units) + " " + std::to_string(occupied) +
 	      " " + std::to_string(vacant) + " " + std::to_string(area) + " " +
-	      std::to_string(length);
+	      std::to_string(length) + " " + std::to_string(lat) + " " + std::to_string(lng);
 	}
 	void parse_from_string(const std::string& s) {
 		std::istringstream sin(s);
 		sin >> id >> display_name >> population >> location >> total_housing_units
-		  >> occupied >> vacant >> area >> length;	  
+		  >> occupied >> vacant >> area >> length >> lat >> lng;
 	}
 	std::vector<std::string> generate_s_query() const {
 		return generate_location_s_query(location);

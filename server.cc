@@ -90,7 +90,9 @@ void generate_html(const Response& response) {
 	ret += "  <body>\n";
 	for (const auto& unit : response.units) {
 		ret += "    <p>";
-		ret += unit.display_name;
+		const string text = "geo-id: " + unit.display_name;
+		const string link = "https://www.google.com/maps/@" + to_string(unit.lat)+ "," + to_string(unit.lng) + ",15z";
+		ret += "<a href=\"" + link + "\">" + text + "</a>";
 		ret += "</p>\n";
 	}
 	ret += "  </body>\n";
