@@ -4,8 +4,8 @@
 #include <cmath>
 #include <iostream>
 #include <algorithm>
-#include "feature-interface.h"
-#include "utils.h"
+#include "../interface/feature-interface.h"
+#include "../utils/utils.h"
 
 using namespace std;
 
