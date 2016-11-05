@@ -1,8 +1,10 @@
 Our web app analyzes U.S. Census demographics data to deliver targeted advice for small businesses looking to expand.
 
-The owner simply writes a paragraph describing their business, and enters the existing location(s).  Using machine learning techniques (for now, we use locality-sensitive hashing followed by singular value decomposition) the app determines the regions within Delaware that are most similar to the location where the business has proven itself to be successful.  It then uses natural language processing to order the viable regions according to the owner's specific circumstances.
+The owner writes a paragraph describing their business, and enters the existing location(s).  Using machine learning techniques (for now, we use locality-sensitive hashing followed by singular value decomposition) the app determines the regions within Delaware that are most similar to the locations where the business has already succeeded.  It then uses natural language processing to order the viable regions according to the owner's specific circumstances.
 
-The result is a list of 10 neighborhood-sized regions (corresponding to U.S. Census Bureau tracts), which the owner can then explore further.
+The underlying data consists of over 400 features, consisting of various combinations of age, race, and gender, allowing the algorithm to extract real meaning.
+
+The end result is a list of 10 regions, corresponding to U.S. Census Bureau tracts, which the owner can then explore further.
 
 
 
