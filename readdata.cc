@@ -60,15 +60,16 @@ void write_units(const std::vector<Unit>& units) {
 int main() {
   std::fstream housing_data;
   housing_data.open("Census_Housing_Units.csv");
-  std::string s; std::getline(housing_data, s);
+  std::string s;
+  std::getline(housing_data, s);
 
-  std::fstream block_data;//5
+  std::fstream block_data;
   block_data.open("Census_Block_Groups_2010.csv");
   std::getline(block_data, s);
-    
+
   std::map<int, Unit> units;
   
-  while(true){
+  while (true){
     std::getline(housing_data, s);
     if(s.length() == 0) break;
     std::vector<std::string> fields = tokenize(s);

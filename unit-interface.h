@@ -43,7 +43,7 @@ struct SQueryIndex {
 struct Unit {
 	int64_t id;
 	std::string display_name;
-    int64_t population;
+    int64_t population = 0;
     std::string location;
 
 	std::string serialize_to_string() const {
