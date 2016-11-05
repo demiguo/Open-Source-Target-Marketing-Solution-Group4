@@ -6,8 +6,10 @@ The underlying data consists of over 400 features, consisting of various combina
 
 The end result is a list of 10 regions, corresponding to U.S. Census Bureau tracts, which the owner can then explore further.
 
+Running the development server
 
-
+''' bash build.sh 
+(optional bash offline.sh '''
 
 ##Challenge #1: Open Source Target Marketing Solution (Open Data Delaware)
 
