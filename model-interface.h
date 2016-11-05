@@ -14,7 +14,8 @@ struct Model {
 		for (double p : parameters) {
 			sout << " " << p;
 		}
-		return "";
+		sout.flush();
+		return sout.str();
 	}
 	void parse_from_string(const std::string& s) {
 		std::istringstream sin(s);
