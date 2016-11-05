@@ -8,10 +8,6 @@
 using namespace std;
 
 namespace open_bracket {
-namespace {
-const string unit_filename = "";
-const string feature_filename = "";
-}
 
 void update_features(const Unit& unit, Feature* feature) {
 	feature->unit = unit;

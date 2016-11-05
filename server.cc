@@ -18,9 +18,6 @@
 using namespace std;
 
 namespace open_bracket {
-namespace {
-const string model_file = "";
-}
 
 void rank(const Request& request, const Model& model, Response* response) {
 	Unit unit;

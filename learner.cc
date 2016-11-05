@@ -8,10 +8,6 @@
 using namespace std;
 
 namespace open_bracket {
-namespace {
-const string feature_filename = "";
-const string model_file = "";
-}
 
 void train_model(const std::vector<Feature>& features, Model* model) {
 }
