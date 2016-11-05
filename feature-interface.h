@@ -9,11 +9,13 @@
 
 enum {
 	POPULATION = 0,
+	RENT_BUDGET = 1,
 	NUM_FEATURES,
 };
 
 struct Feature {
-	Unit unit;
+	int64_t unit_id;
+	int64_t user_id;
 	std::vector<double> features;
 	double label = 0.0;
 

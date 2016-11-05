@@ -12,6 +12,7 @@ namespace open_bracket {
 void update_features(const Unit& unit, Feature* feature) {
 	feature->unit = unit;
 	feature->features[POPULATION] = 100.0;
+	feature->features[RENT_BUDGET] = 10.0;
 }
 
 void extract_features() {
