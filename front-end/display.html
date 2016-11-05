@@ -32,7 +32,7 @@
 <body>
 <div class="row">
 <div class="col-sm-11">
-      <div class="jumbotron" style="height:850px; width:1350px; background: url('img/map.png') no-repeat center center;background-size:1500px 900px">
+      <div class="jumbotron" style="height:850px; width:1350px; background: url('img/map-2.jpg') no-repeat center center;background-size:1500px 900px">
 
 <div class="row">
     <div class="col-sm-12" >
@@ -44,14 +44,14 @@
           function submitForm() {
             document.getElementById("input_describe").value = window.localStorage.description;
             document.getElementById("input_feature").value = window.localStorage.weights;
-            console.log(document.getElementById("input_describe").value );
+            console.log(document.getElementById("input_describe").value);
             console.log(document.getElementById("input_feature").value);
             document.getElementById("run").submit();
           }
         </script>
         <p style="text-align:center">
         <input type="button" 
-        class="btn btn-info btn-lg" value="Submit" style="position:absolute;left:640px;top:610px" onclick="submitForm()" ></input>
+        class="btn btn-warning btn-lg" value="Submit" style="position:absolute;left:640px;top:610px" onclick="submitForm()" ></input>
         </p>
         </form>
     </div>
