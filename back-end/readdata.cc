@@ -98,8 +98,8 @@ int main() {
     u.area = stod(fields[10]);
     u.length = stod(fields[11]);
     // Set default lat/lgn.
-    u.lat = 39.7492631;
-    u.lng = -75.5551588;
+    u.lat = 39.324991;
+    u.lng = -75.6225381;
     units[u.id] = u;
   }
   printf("Total number of geo-ids = %d\n", (int)units.size());
