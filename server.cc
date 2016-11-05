@@ -13,7 +13,7 @@
 #include "unit-interface.h"
 #include "utils.h"
 
-//#define ENABLE_CGI
+#define ENABLE_CGI
 #ifdef ENABLE_CGI
 #include <cgicc/CgiDefs.h> 
 #include <cgicc/Cgicc.h> 
@@ -137,7 +137,7 @@ void generate_html(const Response& response) {
 		id ++;
 		const string text = "Rank" + to_string(id);
 		const string link = "https://www.google.com/maps/@" + to_string(unit.lat)+ "," + to_string(unit.lng) + ",15z";
-		ret += "<a href=\"" + link + "\" target=\"_blank\" class=\"btn btn-info btn-lg btn-block\" role=\"button\">" + text + "</a>";
+		ret += "<a href=\"" + link + "\" target=\"_blank\" class=\"btn btn-warning btn-lg btn-block\" role=\"button\">" + text + "</a>";
 	}
 	ret += "</div></div>\n";
 //    ret += "<p>" + description + "</p>\n";
@@ -156,10 +156,10 @@ void parse_request(const std::string& description, Request* request) {
 	} else if (description.find("Desserts") != -1) {
 		request->query_location = rest2;
 	}
-	FILE *f = fopen("test.log", "w");
-	fprintf(f, "description = %s\n", description.c_str());
-	fprintf(f, "request.query_location = %s\n", request->query_location.c_str());
-	fclose(f);
+	//FILE *f = fopen("test.log", "w");
+	//fprintf(f, "description = %s\n", description.c_str());
+	//fprintf(f, "request.query_location = %s\n", request->query_location.c_str());
+	//fclose(f);
 }
 
 void start() {
