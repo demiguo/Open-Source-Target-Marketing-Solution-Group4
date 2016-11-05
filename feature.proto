@@ -1,0 +1,5 @@
+package open_bracket;
+
+message Feature {
+  optional int64 id = 1;
+}
