@@ -2,7 +2,6 @@
 #include<istream>
 #include<iostream>
 #include<string>
-#include<bits/stdc++.h>
 #include "unit-interface.h"
 
 std::vector<std::string> tokenize(std::string s){
