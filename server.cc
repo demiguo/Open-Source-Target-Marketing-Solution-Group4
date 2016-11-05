@@ -11,7 +11,7 @@
 #include "unit-interface.h"
 #include "utils.h"
 
-//#define ENABLE_CGI
+#define ENABLE_CGI
 #ifdef ENABLE_CGI
 #include <cgicc/CgiDefs.h> 
 #include <cgicc/Cgicc.h> 
@@ -110,9 +110,9 @@ void parse_request(const std::string& description, Request* request) {
 	// TODO: use NLP to parse the meaning of the description.
 
 	// Followings are hacky code for demos.
-	if (description.find("Harry's Seafood")) {
+	if (description.find("Harry's Seafood") != -1) {
 		request->query_location = rest1;
-	} else if (description.find("Desserts")) {
+	} else if (description.find("Desserts") != -1) {
 		request->query_location = rest2;
 	}
 	FILE *f = fopen("test.log", "w");
