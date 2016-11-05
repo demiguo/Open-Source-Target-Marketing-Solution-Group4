@@ -22,18 +22,20 @@ enum {
 	LENGTH = 6,
 	NUM_FEATURES,
 };
+extern const int NUM_HIDDEN_FEATURES = 361;
 
 struct Feature {
 	int64_t unit_id;
 	int64_t user_id;
 	std::vector<double> features;
+	std::vector<double> hidden_features;
 	double label = 0.0;
 
 	Feature() {
 		features.resize(NUM_FEATURES);
 	}
 
-	void update(const Unit& unit) {
+	void update(const Unit& unit, const std::vector<double>& _hidden_features) {
 		unit_id = unit.id;
 		user_id = 0;
 		features[POPULATION] = unit.population;
@@ -46,6 +48,8 @@ struct Feature {
 		// TODO: load real rent budget.
 		features[RENT_BUDGET] = 10.0;
 
+		hidden_features = _hidden_features;
+
 		// TODO: collect actual label.
 		label = 2.0 * (1.0 / (1.0 + exp(-unit.total_housing_units / 10.0)) - 0.5);
 	}
@@ -55,8 +59,14 @@ struct Feature {
 		std::string ans = "";
 		std::ostringstream ss;
 		ss << unit_id << ' ' << user_id << ' ';
-		for (double d : features)
+		ss << features.size() << ' ';
+		for (double d : features) {
 			ss << d << ' ';
+		}
+		ss << hidden_features.size() << ' ';
+		for (double d : hidden_features) {
+			ss << d << ' ';
+		}
 		ss << label;
 		ss.flush();
 		return ss.str();
@@ -66,9 +76,26 @@ struct Feature {
 		std::istringstream ss(s);
 		ss >> unit_id;
 		ss >> user_id;
+		int num_features;
+		ss >> num_features;
+		if (num_features != NUM_FEATURES) {
+			printf("Bad number of features %d %d.\n", num_features, (int)NUM_FEATURES);
+			return;
+		}
 		features.resize(NUM_FEATURES);
-		for (int i = 0; i < NUM_FEATURES; ++i)
+		for (int i = 0; i < NUM_FEATURES; ++i) {
 			ss >> features[i];
+		}
+		int num_hidden_features;
+		ss >> num_hidden_features;
+		if (num_hidden_features != NUM_HIDDEN_FEATURES) {
+			printf("Bad number of hidden features %d %d.\n", num_hidden_features, (int)NUM_HIDDEN_FEATURES);
+			return;
+		}
+		hidden_features.resize(NUM_HIDDEN_FEATURES);
+		for (int i = 0; i < NUM_HIDDEN_FEATURES; ++i) {
+			ss >> hidden_features[i];
+		}
 		ss >> label;
 	}
 };

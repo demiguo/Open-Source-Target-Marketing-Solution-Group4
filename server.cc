@@ -24,13 +24,15 @@ using namespace std;
 namespace open_bracket {
 namespace {
 const std::string default_location = "100050517021070";
+const std::string rest1 = "100030019022004";
 }
 
 namespace linear_regression {
 
 double predict(const Unit& unit, const Model& model) {
 	Feature feature;
-	feature.update(unit);
+	vector<double> hidden_features(NUM_HIDDEN_FEATURES, 0.0);
+	feature.update(unit, hidden_features);
 	double sum = 0;
 	for (int i = 0; i < NUM_FEATURES; ++i) {
 		sum += model.parameters[i] * feature.features[i];
