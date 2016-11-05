@@ -60,7 +60,8 @@ struct Unit {
 	}
 	void parse_from_string(const std::string& s) {
 		std::istringstream sin(s);
-		sin >> id >> display_name >> population >> location;	  
+		sin >> id >> display_name >> population >> location >> total_housing_units
+		  >> occupied >> vacant >> area >> length;	  
 	}
 	std::vector<std::string> generate_s_query() const {
 		return generate_location_s_query(location);
