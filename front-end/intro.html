@@ -17,32 +17,82 @@
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+.box1 {
+  background:#000;
+  color:#fff;
+  width:191px;
+  height:122px;
+  /* for IE */
+  filter:alpha(opacity=60);
+  /* CSS3 standard */
+  opacity:0.6;
+}
+</style>
 </head>
-<body>
-	<script type="text/javascript">
-	</script>
-	<div class="row">
-		<div class="col-sm-0">
-		</div>
-		<div class="col-sm-11">
-			<div class="jumbotron" style="height:650px; width:1350px; background: url('img/final-final.jpg') no-repeat center center;">
-							<br><br><br><br>
-							<p style="text-align:center; color:white"><font size="6">The <b>Business Locator</b></font></p>
-				<div class="row">
-				
-				<p style="text-align:center;color:white;position:absolute;left:495px;right:395px"> Find a best location for your business! </p>
-				</div>
-				<div class="row">
-				<br><br><br><br><br><br><br><br><br><br><br><br>
-				<p style="text-align:center">
-					<a href="describe.html" target="main" class="btn btn-warning btn-lg" role="button">Start Business</a>
 
-				</p>
-			</div>
-			</div>
-		</div>
-		<div class="col-sm-1">
-		</div>
-	</div>
+<body>
+<div class="row">
+<div class="col-sm-12">
+<div id="myCarousel" class="carousel slide">
+  <!-- 轮播（Carousel）指标 -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>   
+  <!-- 轮播（Carousel）项目 -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="img/wall-1.jpg" alt="First slide">
+       <div class="container">
+          <div class="carousel-caption"style="position:absolute;top:500px">
+            <h1>Our Mission</h1>
+            <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            <a class="btn btn-large btn-primary" href="describe.html" target="main">Start</a>
+          </div>
+       </div>
+    </div>
+    <div class="item">
+      <img src="img/wall-4.jpeg" alt="Second slide">
+        <div class="container">
+          <div class="carousel-caption"style="position:absolute;top:500px">
+            <h1>What this can do?</h1>
+            <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            <a class="btn btn-large btn-primary" href="describe.html" target="main">Start</a>
+          </div>
+       </div>
+
+    </div>
+    <div class="item">
+      <img src="img/wall-6.jpg" alt="Third slide">
+          <div class="container">
+          <div class="carousel-caption" style="position:absolute;top:500px">
+            <h1>How did we do</h1>
+            <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            <a class="btn btn-large btn-primary" href="describe.html" target="main">Start</a>
+          </div>
+       </div>
+
+      <script>
+      console.log("hi");
+      </script>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+
+</div> 
+</div>
+</div>
 </body>
 </html>
