@@ -9,7 +9,7 @@ std::vector<std::string> tokenize(std::string s){
   std::vector<std::string> ans;
   int start = 0;
   for(int i=1;i<=s.length();i++){
-    if(i = s.length() || s[i] == ','){
+    if(i == s.length() || s[i] == ','){
       ans.push_back(s.substr(start, i - start));
       start = i;
     }
@@ -20,7 +20,7 @@ std::vector<std::string> tokenize(std::string s){
 int main(){
   std::fstream data;
   data.open("Census_Housing_Units.csv");
-
+  
   std::freopen("units.out", "w", stdout);
   
   std::string s; std::getline(data, s);
