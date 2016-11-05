@@ -51,6 +51,7 @@ void train(const std::vector<Feature>& features, Model* model) {
 	vector<vector<double>> a = create_array(num_features, num_features);
 	for (const auto& feature : features) {
 		const auto& x = feature.features;
+		if (x.size() != NUM_FEATURES) continue;
 		for (int i = 0; i < num_features; ++i) {
 			for (int j = 0; j < num_features; ++j) {
 				a[i][j] += x[i] * x[j];
@@ -60,6 +61,7 @@ void train(const std::vector<Feature>& features, Model* model) {
 	vector<double> b(num_features, 0.0);
 	for (const auto& feature : features) {
 		const auto& x = feature.features;
+		if (x.size() != NUM_FEATURES) continue;
 		const double y = feature.label;
 		for (int i = 0; i < num_features; ++i) {
 			b[i] += x[i] * y;
