@@ -6,8 +6,8 @@
 #include <map>
 #include <set>
 
-#include "unit-interface.h"
-#include "utils.h"
+#include "../interface/unit-interface.h"
+#include "../utils/utils.h"
 
 using namespace std;
 

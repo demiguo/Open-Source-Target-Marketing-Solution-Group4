@@ -2,9 +2,10 @@
 #include <string>
 #include <vector>
 #include <cmath>
-#include "model-interface.h"
-#include "feature-interface.h"
-#include "utils.h"
+
+#include "../interface/model-interface.h"
+#include "../interface/feature-interface.h"
+#include "../utils/utils.h"
 #include "linear_regression.h"
 
 using namespace std;
