@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstdio>
+#include <map>
 #include <string.h>
 #include <istream>
 
@@ -22,9 +23,14 @@ char line[max_length];
 
 }
 
-extern const std::string model_file = "models.out";
-extern const std::string unit_filename = "units.out";
-extern const std::string feature_filename = "features.out";
+extern const std::string unit_squery_index_filename = "data/squery_index.dat";
+extern const std::string unit_filename_prefix = "data/units.dat.";
+extern const std::string model_file = "data/models.dat";
+extern const std::string feature_filename = "data/features.dat";
+
+std::string unit_filename(const std::string& s_query) {
+	return unit_filename_prefix + s_query;
+}
 
 template<class T>
 bool load_from_file(const std::string& file, std::vector<T>* data) {

@@ -8,6 +8,7 @@
 #include <istream>
 #include <vector>
 #include <cmath>
+#include <map>
 
 #include "unit-interface.h"
 

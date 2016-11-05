@@ -73,7 +73,7 @@ void start() {
 	load_from_file(model_file, &model);
 
 	vector<Unit> units;
-	load_from_file(unit_filename, &units);
+	load_from_file(unit_filename(0), &units);
 
 	Request request;
 #ifdef ENABLE_CGI

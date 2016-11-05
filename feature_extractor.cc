@@ -13,8 +13,17 @@ namespace open_bracket {
 
 void extract_features() {
 	// Load units from file.
+	SQueryIndex index;
+	load_from_file(unit_squery_index_filename, &index);
 	vector<Unit> units;
-	load_from_file(unit_filename, &units);
+	for (const auto& content : index.num_contents) {
+		vector<Unit> sub_units;
+		load_from_file(unit_filename(content.first), &sub_units);
+		for (const auto& unit : sub_units) {
+			units.push_back(unit);
+		}
+	}
+	printf("Total number of units = %d\n", (int)units.size());
 
 	// Load features from file.
 	vector<Feature> features;
