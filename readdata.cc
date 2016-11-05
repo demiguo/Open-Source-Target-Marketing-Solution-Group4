@@ -63,11 +63,20 @@ int main() {
   std::string s;
   std::getline(housing_data, s);
 
-  std::fstream block_data;
-  block_data.open("Census_Block_Groups_2010.csv");
-  std::getline(block_data, s);
+  
+  //std::fstream block_data;
+  //block_data.open("Census_Block_Groups_2010.csv");
+  //std::getline(block_data, s);
+
+  
 
   std::map<int, Unit> units;
+
+  int64_t total_housing_units = 0;
+  int64_t occupied = 0;
+  int64_t vacant = 0;
+  double area = 0;
+  double length = 0;
   
   while (true){
     std::getline(housing_data, s);
@@ -77,14 +86,24 @@ int main() {
     u.id = stoi(fields[0]);
     u.display_name = fields[2];
     u.location = fields[2];
+    u.total_housing_units = stoi(fields[6]);
+    u.occupied = stoi(fields[7]);
+    u.vacant = stoi(fields[8]);
+    u.area = stod(fields[10]);
+    u.length = stod(fields[11]);
     units[u.id] = u;
   }
+  /*
+  //the groups in block_data contain many units
   while(true){
     std::getline(block_data, s);
     if(s.length() == 0) break;
     std::vector<std::string> fields = tokenize(s);
-    units[stoi(fields[0])].population = stoi(fields[5]);
+    Unit & u = units[stoi(fields[0])];
+    u.population = stoi(fields[5]);
+    
   }
+  */
 
   std::vector<Unit> units_sorted_by_ids;
   for (const auto& unit : units) {
