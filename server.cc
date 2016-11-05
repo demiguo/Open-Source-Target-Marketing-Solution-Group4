@@ -3,6 +3,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
+
+#include "feature-interface.h"
 #include "model-interface.h"
 #include "server-interface.h"
 #include "unit-interface.h"
@@ -19,11 +22,63 @@
 using namespace std;
 
 namespace open_bracket {
+namespace {
+const std::string default_location = "100050517021070";
+}
 
-void rank(const Request& request, const Model& model, Response* response) {
-	Unit unit;
-	unit.display_name = "downtown";
-	response->units.push_back(unit);
+namespace linear_regression {
+
+double predict(const Unit& unit, const Model& model) {
+	Feature feature;
+	feature.update(unit);
+	double sum = 0;
+	for (int i = 0; i < NUM_FEATURES; ++i) {
+		sum += model.parameters[i] * feature.features[i];
+	}
+	return sum;
+}
+
+}
+
+void rank(const Request& request, const Model& model, const SQueryIndex& index, Response* response) {
+	// Extract candidates.
+	std::string location = request.query_location;
+	if (location.empty()) {
+		location = default_location;
+	}
+	vector<std::string> queries = generate_location_s_query(location);
+	int64_t opt_s_query_count = 0;
+	std::string opt_s_query;
+	int64_t expected_count = request.num_results * 3;
+	for (const auto& query : queries) {
+		if (!index.num_contents.count(query)) {
+			continue;
+		}
+		const int64_t count = index.num_contents.at(query);
+		if ((count >= expected_count && (opt_s_query_count < expected_count || count < opt_s_query_count)) ||
+				(count < expected_count && opt_s_query_count < expected_count && count > opt_s_query_count)) {
+			opt_s_query = query;
+			opt_s_query_count = count;
+		}
+	}
+	if (opt_s_query.empty()) {
+		return;
+	}
+	vector<Unit> units;
+	load_from_file(unit_filename(opt_s_query), &units);
+
+	// Ranking
+	vector<pair<double, const Unit*>> units_sorted_by_score;
+	for (const auto& unit : units) {
+		units_sorted_by_score.emplace_back(linear_regression::predict(unit, model), &unit);
+	}
+	sort(units_sorted_by_score.rbegin(), units_sorted_by_score.rend());
+	if (request.num_results > 0 && request.num_results < units_sorted_by_score.size()) {
+		units_sorted_by_score.resize(request.num_results);
+	}
+	for (const auto& unit : units_sorted_by_score) {
+		response->units.push_back(*unit.second);
+	}
 }
 
 void generate_html(const Response& response) {
@@ -47,23 +102,24 @@ void start() {
 	Model model;
 	load_from_file(model_file, &model);
 
+	SQueryIndex index;
+	load_from_file(unit_squery_index_filename, &index);
+
 	Request request;
 #ifdef ENABLE_CGI
 	Cgicc formData;
 	// TODO: parse request from HTML.
+	// TODO: parse current location from HTML.
 #endif
 
 	Response response;
-	rank(request, model, &response);
+	rank(request, model, index, &response);
 	generate_html(response);
 }
 
 }  // namespace 
 
 int main() {
-//    FILE* f = fopen("test", "a");
-//    fprintf(f, "yes\n");
-//    fclose(f);
 	open_bracket::start();
 	return 0;
 }

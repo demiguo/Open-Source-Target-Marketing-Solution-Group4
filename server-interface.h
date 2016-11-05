@@ -6,6 +6,8 @@
 #include <vector>
 
 struct Request {
+	int num_results = 10;
+	std::string query_location;
 };
 
 struct Response {

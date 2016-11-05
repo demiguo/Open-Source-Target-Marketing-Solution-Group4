@@ -12,7 +12,12 @@ namespace open_bracket {
 namespace linear_regression {
 
 void train(const std::vector<Feature>& features, Model* model) {
-
+	// TODO: Implement linear regression.
+	model->model_name = "Linear_regression";
+	auto* parameters = &model->parameters;
+	parameters->clear();
+	parameters->resize(NUM_FEATURES, 0.0);
+	(*parameters)[POPULATION] = 1.0;
 }
 
 }
