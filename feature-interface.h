@@ -20,6 +20,9 @@ struct Feature {
 	Feature() {
 		features.resize(NUM_FEATURES);
 	}
+
+	std::string serialize_to_string() const { return ""; }
+	void parse_from_string(std::string) {}
 };
 
 #endif  // FEATURE_INTERFACE_H
