@@ -3,24 +3,26 @@
 #include <vector>
 #include "model-interface.h"
 #include "feature-interface.h"
+#include "utils.h"
 
 using namespace std;
 
 namespace open_bracket {
-
-string model_name = "";
+namespace {
+const string feature_filename = "";
+const string model_file = "";
+}
 
 void train_model(const std::vector<Feature>& features, Model* model) {
 }
 
 void learner() {
 	std::vector<Feature> features;
-	// TODO: load features from file.
+	load_from_file(feature_filename, &features);
 
 	Model model;
 	train_model(features, &model);
-
-	// TODO: write model to file.
+	write_to_file(model_file, model);
 }
 
 }  // namespace 

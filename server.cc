@@ -4,6 +4,7 @@
 #include "model-interface.h"
 #include "server-interface.h"
 #include "unit-interface.h"
+#include "utils.h"
 
 //#ifdef ENABLE_CGI
 
@@ -17,6 +18,9 @@
 using namespace std;
 
 namespace open_bracket {
+namespace {
+const string model_file = "";
+}
 
 void rank(const Request& request, const Model& model, Response* response) {
 	Unit unit;
@@ -41,8 +45,8 @@ void generate_html(const Response& response) {
 }
 
 void start() {
-	// TODO: load model.
 	Model model;
+	load_from_file(model_file, &model);
 
 	Request request;
 #ifdef ENABLE_CGI
